@@ -5,6 +5,9 @@ const longoBt = document.querySelector('.app__card-button--longo');
 const banner = document.querySelector('.app__image');
 const titulo = document.querySelector('.app__title');
 const botoes = document.querySelectorAll('.app__card-button');
+const musicaFocoInput = document.querySelector('#alternar-musica');
+const musica = new Audio('sons/luna-rise-part-one.mp3');
+musica.loop = true;
 
 //quando o botão 'focoBt' receber o evento 'click', chamamos uma função
 focoBt.addEventListener('click', () => {
@@ -27,6 +30,15 @@ longoBt.addEventListener('click', () => {
     //banner.setAttribute('src', '/imagens/descanso-longo.png')
     alterarContexto('descanso-longo');
     longoBt.classList.add('active');
+});
+
+// //o change é o evento que usamos para checkbox
+musicaFocoInput.addEventListener('change', () => {
+    if(musica.paused){
+        musica.play();
+    } else {
+        musica.pause();
+    }
 });
 
 //função para alterar os botões 'junto'
