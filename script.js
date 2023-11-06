@@ -82,3 +82,5 @@ const contagemRegressiva = () => {
     tempoDecorridoEmSegundos -= 1;
     console.log('Temporizador: ' + tempoDecorridoEmSegundos);
 }
+
+startPauseBt.addEventListener('click', contagemRegressiva);
