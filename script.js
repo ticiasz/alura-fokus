@@ -80,14 +80,23 @@ function alterarContexto(contexto){
 }
 
 const contagemRegressiva = () => {
-    iniciar();
+    if (tempoDecorridoEmSegundos <= 0){
+        zerar();
+        alert('Tempo finalizado!');
+        return //para interromper o código
+    }
     tempoDecorridoEmSegundos -= 1;
     console.log('Temporizador: ' + tempoDecorridoEmSegundos);
 }
 
-startPauseBt.addEventListener('click', contagemRegressiva);
+startPauseBt.addEventListener('click', iniciar);
 
 function iniciar(){
     //usamos o setInterval para executar um método a cada intervalo de tempo (em milissegundos)
     intervaloId = setInterval(contagemRegressiva, 1000);
+}
+
+function zerar(){
+    clearInterval(intervaloId);
+    intervaloId = null;
 }
