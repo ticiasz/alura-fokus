@@ -80,6 +80,7 @@ function alterarContexto(contexto){
 }
 
 const contagemRegressiva = () => {
+    //quando o tempo zerar, chamamos a função zerar e mostramos um alerta
     if (tempoDecorridoEmSegundos <= 0){
         zerar();
         alert('Tempo finalizado!');
@@ -92,6 +93,7 @@ const contagemRegressiva = () => {
 startPauseBt.addEventListener('click', iniciarOuPausar);
 
 function iniciarOuPausar(){
+    //se o intervaloId tiver um valor, ou seja, estiver contando e não for zero, podemos clicar no botão para zerar
     if(intervaloId){
         zerar();
         return
@@ -101,6 +103,7 @@ function iniciarOuPausar(){
 }
 
 function zerar(){
+    //usamos o clearInterval para parar a execução iniciada anteriormente, e depois voltamos com o valor de intervaloId para null
     clearInterval(intervaloId);
     intervaloId = null;
 }
