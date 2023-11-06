@@ -10,6 +10,7 @@ const musica = new Audio('sons/luna-rise-part-one.mp3');
 const startPauseBt = document.querySelector('#start-pause');
 
 let tempoDecorridoEmSegundos = 5;
+let intervaloId = null;
 
 musica.loop = true;
 
@@ -79,8 +80,14 @@ function alterarContexto(contexto){
 }
 
 const contagemRegressiva = () => {
+    iniciar();
     tempoDecorridoEmSegundos -= 1;
     console.log('Temporizador: ' + tempoDecorridoEmSegundos);
 }
 
 startPauseBt.addEventListener('click', contagemRegressiva);
+
+function iniciar(){
+    //usamos o setInterval para executar um método a cada intervalo de tempo (em milissegundos)
+    intervaloId = setInterval(contagemRegressiva, 1000);
+}
