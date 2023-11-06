@@ -6,8 +6,12 @@ const banner = document.querySelector('.app__image');
 const titulo = document.querySelector('.app__title');
 const botoes = document.querySelectorAll('.app__card-button');
 const musicaFocoInput = document.querySelector('#alternar-musica');
-const musica = new Audio('sons/luna-rise-part-one.mp3');
 const startPauseBt = document.querySelector('#start-pause');
+
+const musica = new Audio('sons/luna-rise-part-one.mp3');
+const somPlay = new Audio('sons/play.wav');
+const somPause = new Audio('sons/pause.mp3');
+const somAlertaFimTempo = new Audio('sons/beep.mp3');
 
 let tempoDecorridoEmSegundos = 5;
 let intervaloId = null;
@@ -83,6 +87,7 @@ const contagemRegressiva = () => {
     //quando o tempo zerar, chamamos a função zerar e mostramos um alerta
     if (tempoDecorridoEmSegundos <= 0){
         zerar();
+        somAlertaFimTempo.play();
         alert('Tempo finalizado!');
         return //para interromper o código
     }
@@ -96,10 +101,12 @@ function iniciarOuPausar(){
     //se o intervaloId tiver um valor, ou seja, estiver contando e não for zero, podemos clicar no botão para zerar
     if(intervaloId){
         zerar();
+        somPause.play();
         return
     }
     //usamos o setInterval para executar um método a cada intervalo de tempo (em milissegundos)
     intervaloId = setInterval(contagemRegressiva, 1000);
+    somPlay.play();
 }
 
 function zerar(){
