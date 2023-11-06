@@ -26,6 +26,7 @@ focoBt.addEventListener('click', () => {
     //a função vai dar o valor 'foco' ao atributo 'data-contexto'
     //html.setAttribute('data-contexto', 'foco');
     //banner.setAttribute('src', '/imagens/foco.png');
+    tempoDecorridoEmSegundos = 1500;
     alterarContexto('foco');
     focoBt.classList.add('active');
 });
@@ -33,6 +34,7 @@ focoBt.addEventListener('click', () => {
 curtoBt.addEventListener('click', () => {
     //html.setAttribute('data-contexto', 'descanso-curto');
     //banner.setAttribute('src', '/imagens/descanso-curto.png')
+    tempoDecorridoEmSegundos = 300;
     alterarContexto('descanso-curto');
     curtoBt.classList.add('active');
 });
@@ -40,6 +42,7 @@ curtoBt.addEventListener('click', () => {
 longoBt.addEventListener('click', () => {
     //html.setAttribute('data-contexto', 'descanso-longo');
     //banner.setAttribute('src', '/imagens/descanso-longo.png')
+    tempoDecorridoEmSegundos = 900;
     alterarContexto('descanso-longo');
     longoBt.classList.add('active');
 });
@@ -55,6 +58,7 @@ musicaFocoInput.addEventListener('change', () => {
 
 //função para alterar os botões 'junto'
 function alterarContexto(contexto){
+    mostrarTempo();
     //para cada botão, eu chamo uma função
     //a função recebe contexto, que é específico para cada botão e só é ativado quando o botão é clicado
     botoes.forEach(function(contexto){
@@ -123,8 +127,10 @@ function zerar(){
 }
 
 function mostrarTempo(){
-    const tempo = tempoDecorridoEmSegundos;
-    tempoNaTela.innerHTML = `${tempo}`;
+    //o método date fornece algumas configurações padrão para datas, horários...
+    const tempo = new Date(tempoDecorridoEmSegundos * 1000);
+    const tempoFormatado = tempo.toLocaleTimeString('pt-Br', {minute: '2-digit', second: '2-digit'});
+    tempoNaTela.innerHTML = `${tempoFormatado}`;
 }
 
 mostrarTempo();
