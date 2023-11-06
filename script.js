@@ -7,6 +7,8 @@ const titulo = document.querySelector('.app__title');
 const botoes = document.querySelectorAll('.app__card-button');
 const musicaFocoInput = document.querySelector('#alternar-musica');
 const startPauseBt = document.querySelector('#start-pause');
+const iniciarOuPausarBt = document.querySelector('#start-pause span');
+const iniciarOuPausarBtImg = document.querySelector('.app__card-primary-butto-icon');
 
 const musica = new Audio('sons/luna-rise-part-one.mp3');
 const somPlay = new Audio('sons/play.wav');
@@ -86,9 +88,9 @@ function alterarContexto(contexto){
 const contagemRegressiva = () => {
     //quando o tempo zerar, chamamos a função zerar e mostramos um alerta
     if (tempoDecorridoEmSegundos <= 0){
-        zerar();
         somAlertaFimTempo.play();
         alert('Tempo finalizado!');
+        zerar();
         return //para interromper o código
     }
     tempoDecorridoEmSegundos -= 1;
@@ -105,12 +107,16 @@ function iniciarOuPausar(){
         return
     }
     //usamos o setInterval para executar um método a cada intervalo de tempo (em milissegundos)
-    intervaloId = setInterval(contagemRegressiva, 1000);
     somPlay.play();
+    intervaloId = setInterval(contagemRegressiva, 1000);
+    iniciarOuPausarBt.textContent = 'Pausar';
+    iniciarOuPausarBtImg.setAttribute('src', 'imagens/pause.png');
 }
 
 function zerar(){
     //usamos o clearInterval para parar a execução iniciada anteriormente, e depois voltamos com o valor de intervaloId para null
     clearInterval(intervaloId);
+    iniciarOuPausarBt.textContent = 'Começar';
+    iniciarOuPausarBtImg.setAttribute('src', 'imagens/play_arrow.png');
     intervaloId = null;
 }
