@@ -6,9 +6,9 @@ const taskIconSvg = `
     <path
         d="M9 16.1719L19.5938 5.57812L21 6.98438L9 18.9844L3.42188 13.4062L4.82812 12L9 16.1719Z"
         fill="#01080E" />
-</
+</svg>
 `
-
+//array de objetos (tarefas)
 let tarefas = [
     {
         descricao: 'Tarefa Concluída',
@@ -21,18 +21,26 @@ let tarefas = [
 ]
 
 function createTask(tarefa) {
+    //criando um li dentro do ul (taskListContainer)
     const li = document.createElement('li');
     li.classList.add('app__section-task-list-item');
 
     const svgIcon = document.createElement('svg');
-    svgIcon.innerHTML = taskIconSvg;
+    svgIcon.innerHTML = taskIconSvg; //svg já vem configurado, n precisa de classe
 
     const paragraph = document.createElement('p');
     paragraph.classList.add('app__section-task-list-item-description');
     paragraph.textContent = tarefa.descricao;
 
+    //adicionar o svg e o p como filhos do li
     li.appendChild(svgIcon);
     li.appendChild(paragraph);
 
     return li;
 }
+
+//para cada tarefa vamos criá-la e adicioná-la como filha do ul
+tarefas.forEach(task => {
+    const taskItem = createTask(task);
+    taskListContainer.appendChild(taskItem);
+})
