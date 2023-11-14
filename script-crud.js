@@ -8,6 +8,10 @@ const taskIconSvg = `
         fill="#01080E" />
 </svg>
 `
+const formTask = document.querySelector('.app__form-add-task');
+const toggleFormTaskBtn = document.querySelector('.app__button--add-task')
+const formLabel = document.querySelector('.app__form-label')
+
 //array de objetos (tarefas)
 let tarefas = [
     {
@@ -43,4 +47,10 @@ function createTask(tarefa) {
 tarefas.forEach(task => {
     const taskItem = createTask(task);
     taskListContainer.appendChild(taskItem);
+})
+
+toggleFormTaskBtn.addEventListener('click', () => {
+    formLabel.textContent = 'Adicionando tarefa';
+    //toggle é um método que retira e adiciona algo, dependendo se ela já está lá ou não
+    formTask.classList.toggle('hidden') ;
 })
