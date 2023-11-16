@@ -22,6 +22,12 @@ let tarefas = [
     }*/
 ]
 
+//função para limpar a caixa de texto do forms e escondê-lo
+const limparForm = () => {
+    textArea.value = '';
+    formTask.classList.add('hidden');
+}
+
 //cria a tarefa (visualmente) com os dados do array
 function createTask(tarefa) {
     //criando um li
@@ -55,11 +61,8 @@ toggleFormTaskBtn.addEventListener('click', () => {
     formTask.classList.toggle('hidden');
 })
 
-//fazendo o botão cancelar fechar o forms e limpar a área de texto
-cancelFormTaskBtn.addEventListener('click', () => {
-    formTask.classList.toggle('hidden');
-    textArea.value = '';
-})
+//fazendo o botão cancelar chamar a função limparForm
+cancelFormTaskBtn.addEventListener('click', limparForm)
 
 //acionar um evento ao dar um submit no formulário
 formTask.addEventListener('submit', (evento) => {
@@ -77,5 +80,5 @@ formTask.addEventListener('submit', (evento) => {
     const taskItem = createTask(task);
     //mostrando a tarefa
     taskListContainer.appendChild(taskItem);
-    textArea.value = '';
+    limparForm();
 })
