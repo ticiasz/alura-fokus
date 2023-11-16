@@ -11,21 +11,19 @@ const taskIconSvg = `
 const formTask = document.querySelector('.app__form-add-task');
 const toggleFormTaskBtn = document.querySelector('.app__button--add-task')
 const formLabel = document.querySelector('.app__form-label')
+const textArea = document.querySelector('.app__form-textarea')
 
 //array de objetos (tarefas)
 let tarefas = [
-    {
+    /*{
         descricao: 'Tarefa Concluída',
         concluida: true
-    },
-    {
-        descricao: 'Tarefa Pendente',
-        concluida: false
-    }
+    }*/
 ]
 
+//cria a tarefa (visualmente) com os dados do array
 function createTask(tarefa) {
-    //criando um li dentro do ul (taskListContainer)
+    //criando um li
     const li = document.createElement('li');
     li.classList.add('app__section-task-list-item');
 
@@ -43,9 +41,10 @@ function createTask(tarefa) {
     return li;
 }
 
-//para cada tarefa vamos criá-la e adicioná-la como filha do ul
 tarefas.forEach(task => {
+    //para cada tarefa vamos criá-la (como um li)
     const taskItem = createTask(task);
+    //adicionamos o li como filho do ul (taskListContainer)
     taskListContainer.appendChild(taskItem);
 })
 
@@ -53,4 +52,22 @@ toggleFormTaskBtn.addEventListener('click', () => {
     formLabel.textContent = 'Adicionando tarefa';
     //toggle é um método que retira e adiciona algo, dependendo se ela já está lá ou não
     formTask.classList.toggle('hidden') ;
+})
+
+//acionar um evento ao dar um submit no formulário
+formTask.addEventListener('submit', (evento) => {
+    //para previnir de dar um submit automático sozinho
+    evento.preventDefault();
+    const task = {
+        //a descrição será o valor na área de texto do form
+        descricao: textArea.value,
+        //falso pois está sendo adicionada agora
+        concluida: false
+    }
+    //enviar a tarefa no array
+    tarefas.push(task);
+    //criando a tarefa
+    const taskItem = createTask(task);
+    //mostrando a tarefa
+    taskListContainer.appendChild(taskItem);
 })
