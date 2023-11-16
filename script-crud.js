@@ -9,9 +9,10 @@ const taskIconSvg = `
 </svg>
 `
 const formTask = document.querySelector('.app__form-add-task');
-const toggleFormTaskBtn = document.querySelector('.app__button--add-task')
-const formLabel = document.querySelector('.app__form-label')
-const textArea = document.querySelector('.app__form-textarea')
+const toggleFormTaskBtn = document.querySelector('.app__button--add-task');
+const formLabel = document.querySelector('.app__form-label');
+const textArea = document.querySelector('.app__form-textarea');
+const cancelFormTaskBtn = document.querySelector('.app__form-footer__button--cancel');
 
 //array de objetos (tarefas)
 let tarefas = [
@@ -51,7 +52,13 @@ tarefas.forEach(task => {
 toggleFormTaskBtn.addEventListener('click', () => {
     formLabel.textContent = 'Adicionando tarefa';
     //toggle é um método que retira e adiciona algo, dependendo se ela já está lá ou não
-    formTask.classList.toggle('hidden') ;
+    formTask.classList.toggle('hidden');
+})
+
+//fazendo o botão cancelar fechar o forms e limpar a área de texto
+cancelFormTaskBtn.addEventListener('click', () => {
+    formTask.classList.toggle('hidden');
+    textArea.value = '';
 })
 
 //acionar um evento ao dar um submit no formulário
@@ -70,4 +77,5 @@ formTask.addEventListener('submit', (evento) => {
     const taskItem = createTask(task);
     //mostrando a tarefa
     taskListContainer.appendChild(taskItem);
+    textArea.value = '';
 })
