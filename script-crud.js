@@ -13,6 +13,7 @@ const toggleFormTaskBtn = document.querySelector('.app__button--add-task');
 const formLabel = document.querySelector('.app__form-label');
 const textArea = document.querySelector('.app__form-textarea');
 const cancelFormTaskBtn = document.querySelector('.app__form-footer__button--cancel');
+const taskAtiveDescription = document.querySelector('.app__section-active-task-description');
 
 //para pegar uma tarefa salva no local storage
 const localStorageTarefas = localStorage.getItem('tarefas');
@@ -27,6 +28,32 @@ let tarefas = localStorageTarefas ? JSON.parse(localStorageTarefas) : [];
         concluida: true
     }
 ]*/
+
+let TarefaSelecionada = null;
+let itemTarefaSelecionada = null;
+
+const selecionaTarefa = (tarefa, elemento) => {
+    //percorremos os elementos ativos (selecionados) e removemos a classe que os deixa assim
+    //isso garante que não haverá nenhuma tarefa selecionada anteriormente
+    document.querySelectorAll('.app__section-task-list-item-active').forEach(function (button) {
+        button.classList.remove('app__section-task-list-item-active')
+    })
+
+    //verifica se a tarefa selecionada é a mesma que já estava selecionada
+    //se for, limpa as variáveis e retorna, desmarcando a tarefa
+    if (TarefaSelecionada == tarefa) {
+        taskAtiveDescription.textContent = null;
+        itemTarefaSelecionada = null;
+        TarefaSelecionada = null;
+        return
+    }
+
+    //se não for, atualiza as variáveis com a nova tarefa selecionada
+    tarefaSelecionada = tarefa;
+    itemTarefaSelecionada = elemento;
+    taskAtiveDescription.textContent = tarefa.descricao;
+    elemento.classList.add('app__section-task-list-item-active');
+}
 
 //função para limpar a caixa de texto do forms e escondê-lo
 const limparForm = () => {
@@ -46,6 +73,10 @@ function createTask(tarefa) {
     const paragraph = document.createElement('p');
     paragraph.classList.add('app__section-task-list-item-description');
     paragraph.textContent = tarefa.descricao;
+
+    li.onclick = () => {
+        selecionaTarefa(tarefa, li);
+    }
 
     //adicionar o svg e o p como filhos do li
     li.appendChild(svgIcon);
