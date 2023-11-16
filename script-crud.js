@@ -14,13 +14,19 @@ const formLabel = document.querySelector('.app__form-label');
 const textArea = document.querySelector('.app__form-textarea');
 const cancelFormTaskBtn = document.querySelector('.app__form-footer__button--cancel');
 
+//para pegar uma tarefa salva no local storage
+const localStorageTarefas = localStorage.getItem('tarefas');
+//se tiver algo no localStorage, o JSON.parse vai transformar de string para objeto js
+//se não, o array fica vazio []
+let tarefas = localStorageTarefas ? JSON.parse(localStorageTarefas) : [];
+
 //array de objetos (tarefas)
-let tarefas = [
-    /*{
+/*let tarefas = [
+    {
         descricao: 'Tarefa Concluída',
         concluida: true
-    }*/
-]
+    }
+]*/
 
 //função para limpar a caixa de texto do forms e escondê-lo
 const limparForm = () => {
@@ -64,6 +70,12 @@ toggleFormTaskBtn.addEventListener('click', () => {
 //fazendo o botão cancelar chamar a função limparForm
 cancelFormTaskBtn.addEventListener('click', limparForm)
 
+const updateLocalStorage = () => {
+    //a key é 'tarefas' e seu valor vai ser o array de tarefas
+    //aqui o JSON vai ajudar a converter de objeto para string
+    localStorage.setItem('tarefas', JSON.stringify(tarefas))
+}
+
 //acionar um evento ao dar um submit no formulário
 formTask.addEventListener('submit', (evento) => {
     //para previnir de dar um submit automático sozinho
@@ -80,5 +92,7 @@ formTask.addEventListener('submit', (evento) => {
     const taskItem = createTask(task);
     //mostrando a tarefa
     taskListContainer.appendChild(taskItem);
+    //atualizar o localStorage com a tarefa
+    updateLocalStorage();
     limparForm();
 })
