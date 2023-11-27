@@ -63,7 +63,7 @@ const limparForm = () => {
 
 //cria a tarefa (visualmente) com os dados do array
 function createTask(tarefa) {
-    //criando um li
+    //criando um li e atribuindo uma classe (aparência) a ele
     const li = document.createElement('li');
     li.classList.add('app__section-task-list-item');
 
@@ -74,13 +74,21 @@ function createTask(tarefa) {
     paragraph.classList.add('app__section-task-list-item-description');
     paragraph.textContent = tarefa.descricao;
 
+    const button = document.createElement('button');
+    button.classList.add('.app_button-edit');
+    const imgButton = document.createElement('img');
+    imgButton.setAttribute('src', '/imagens/edit.png');
+
     li.onclick = () => {
         selecionaTarefa(tarefa, li);
     }
 
-    //adicionar o svg e o p como filhos do li
+    //adicionando a imagem do botão ao botão
+    button.append(imgButton);
+    //adicionar o svg, o p e o button como filhos do li
     li.appendChild(svgIcon);
     li.appendChild(paragraph);
+    li.appendChild(button);
 
     return li;
 }
@@ -109,7 +117,7 @@ const updateLocalStorage = () => {
 
 //acionar um evento ao dar um submit no formulário
 formTask.addEventListener('submit', (evento) => {
-    //para previnir de dar um submit automático sozinho
+    //para prevenir de dar um submit automático sozinho (comportamento padrão)
     evento.preventDefault();
     const task = {
         //a descrição será o valor na área de texto do form
