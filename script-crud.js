@@ -29,7 +29,7 @@ let tarefas = localStorageTarefas ? JSON.parse(localStorageTarefas) : [];
     }
 ]*/
 
-let TarefaSelecionada = null;
+let tarefaSelecionada = null;
 let itemTarefaSelecionada = null;
 
 const selecionaTarefa = (tarefa, elemento) => {
@@ -41,10 +41,10 @@ const selecionaTarefa = (tarefa, elemento) => {
 
     //verifica se a tarefa selecionada é a mesma que já estava selecionada
     //se for, limpa as variáveis e retorna, desmarcando a tarefa
-    if (TarefaSelecionada == tarefa) {
+    if (tarefaSelecionada == tarefa) {
         taskAtiveDescription.textContent = null;
         itemTarefaSelecionada = null;
-        TarefaSelecionada = null;
+        tarefaSelecionada = null;
         return
     }
 
@@ -75,7 +75,7 @@ function createTask(tarefa) {
     paragraph.textContent = tarefa.descricao;
 
     const button = document.createElement('button');
-    button.classList.add('.app_button-edit');
+    button.classList.add('app_button-edit');
     const imgButton = document.createElement('img');
     imgButton.setAttribute('src', '/imagens/edit.png');
 
@@ -88,7 +88,7 @@ function createTask(tarefa) {
     //adicionar o svg, o p e o button como filhos do li
     li.appendChild(svgIcon);
     li.appendChild(paragraph);
-    li.appendChild(button);
+    li.appendChild(botao);
 
     return li;
 }
