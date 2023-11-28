@@ -79,6 +79,15 @@ function createTask(tarefa) {
     const imgButton = document.createElement('img');
     imgButton.setAttribute('src', '/imagens/edit.png');
 
+    //ao clicar no botão de edição, aparecerá um prompt para colocar o novo nome
+    button.onclick = () => {
+        const attDescription = prompt('Qual é o novo nome da tarefa?');
+        paragraph.textContent = attDescription;
+        //atualizamos a descrição do objeto tarefa e atualizamos o LS
+        tarefa.descricao = attDescription;
+        updateLocalStorage();
+    }
+
     li.onclick = () => {
         selecionaTarefa(tarefa, li);
     }
@@ -88,7 +97,7 @@ function createTask(tarefa) {
     //adicionar o svg, o p e o button como filhos do li
     li.appendChild(svgIcon);
     li.appendChild(paragraph);
-    li.appendChild(botao);
+    li.appendChild(button);
 
     return li;
 }
