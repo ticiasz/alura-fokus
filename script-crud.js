@@ -82,10 +82,12 @@ function createTask(tarefa) {
     //ao clicar no botão de edição, aparecerá um prompt para colocar o novo nome
     button.onclick = () => {
         const attDescription = prompt('Qual é o novo nome da tarefa?');
-        paragraph.textContent = attDescription;
-        //atualizamos a descrição do objeto tarefa e atualizamos o LS
-        tarefa.descricao = attDescription;
-        updateLocalStorage();
+        if (attDescription){
+           paragraph.textContent = attDescription;
+            //atualizamos a descrição do objeto tarefa e atualizamos o LS
+            tarefa.descricao = attDescription;
+            updateLocalStorage(); 
+        }
     }
 
     li.onclick = () => {
