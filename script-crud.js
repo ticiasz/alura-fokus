@@ -92,8 +92,13 @@ function createTask(tarefa) {
         }
     }
 
-    li.onclick = () => {
+    if (tarefa.concluida) {
+        li.classList.add('app__section-task-list-item-complete');
+        button.setAttribute('disabled', 'disabled');
+    } else {
+        li.onclick = () => {
         selecionaTarefa(tarefa, li);
+        }
     }
 
     //adicionando a imagem do botão ao botão
@@ -155,5 +160,7 @@ document.addEventListener('FocoFinalizado', () =>{
         itemTarefaSelecionada.classList.remove('app__section-task-list-item-active');
         itemTarefaSelecionada.classList.add('app__section-task-list-item-complete');
         itemTarefaSelecionada.querySelector('button').setAttribute('disabled', 'disabled');
+        tarefaSelecionada.concluida = true;
+        updateLocalStorage();
     }
 })
