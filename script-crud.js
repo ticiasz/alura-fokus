@@ -33,7 +33,7 @@ let tarefaSelecionada = null;
 let itemTarefaSelecionada = null;
 
 //precisamos passar o elemento (li) pois estamos chamando uma função externa
-// então é preciso mandar para a função uma referência do li que está sendo clicado
+//então é preciso mandar para a função uma referência do li que está sendo clicado
 const selecionaTarefa = (tarefa, elemento) => {
     //percorremos os elementos ativos (selecionados) e removemos a classe que os deixa assim
     //isso garante que não haverá nenhuma tarefa selecionada anteriormente
@@ -147,4 +147,13 @@ formTask.addEventListener('submit', (evento) => {
     //atualizar o localStorage com a tarefa
     updateLocalStorage();
     limparForm();
+})
+
+//fazendo a tarefa ficar completa ao fim do temporizador
+document.addEventListener('FocoFinalizado', () =>{
+    if (tarefaSelecionada && itemTarefaSelecionada) {
+        itemTarefaSelecionada.classList.remove('app__section-task-list-item-active');
+        itemTarefaSelecionada.classList.add('app__section-task-list-item-complete');
+        itemTarefaSelecionada.querySelector('button').setAttribute('disabled', 'disabled');
+    }
 })
