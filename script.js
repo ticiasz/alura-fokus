@@ -95,6 +95,15 @@ const contagemRegressiva = () => {
     if (tempoDecorridoEmSegundos <= 0){
         somAlertaFimTempo.play();
         alert('Tempo finalizado!');
+        //se o pomodoro estiver no modo foco, o focoAtivo receberá algo
+        //quer dizer que estamos fazendo uma tarefa
+        const focoAtivo = html.getAttribute('data-contexto') == 'foco';
+        if (focoAtivo) {
+            //instanciando uma classe para criar um evento
+            const evento = new CustomEvent('FocoFinalizado');
+            //permitindo que outras partes possam ouvir e reagir a esse evento
+            document.dispatchEvent(evento);
+        }
         zerar();
         return //para interromper o código
     }
