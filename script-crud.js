@@ -32,14 +32,16 @@ let tarefas = localStorageTarefas ? JSON.parse(localStorageTarefas) : [];
 let tarefaSelecionada = null;
 let itemTarefaSelecionada = null;
 
+//precisamos passar o elemento (li) pois estamos chamando uma função externa
+// então é preciso mandar para a função uma referência do li que está sendo clicado
 const selecionaTarefa = (tarefa, elemento) => {
     //percorremos os elementos ativos (selecionados) e removemos a classe que os deixa assim
     //isso garante que não haverá nenhuma tarefa selecionada anteriormente
-    document.querySelectorAll('.app__section-task-list-item-active').forEach(function (button) {
-        button.classList.remove('app__section-task-list-item-active')
+    document.querySelectorAll('.app__section-task-list-item-active').forEach(function (item) {
+        item.classList.remove('app__section-task-list-item-active')
     })
 
-    //verifica se a tarefa selecionada é a mesma que já estava selecionada
+    //verifica se a tarefa selecionada da vez é a mesma que já estava selecionada
     //se for, limpa as variáveis e retorna, desmarcando a tarefa
     if (tarefaSelecionada == tarefa) {
         taskAtiveDescription.textContent = null;
