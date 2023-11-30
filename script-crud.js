@@ -14,6 +14,7 @@ const formLabel = document.querySelector('.app__form-label');
 const textArea = document.querySelector('.app__form-textarea');
 const cancelFormTaskBtn = document.querySelector('.app__form-footer__button--cancel');
 const taskAtiveDescription = document.querySelector('.app__section-active-task-description');
+const removeTaskCompleteBtn = document.querySelector('#btn-remover-concluidas');
 
 //para pegar uma tarefa salva no local storage
 const localStorageTarefas = localStorage.getItem('tarefas');
@@ -164,3 +165,14 @@ document.addEventListener('FocoFinalizado', () =>{
         updateLocalStorage();
     }
 })
+
+removeTaskCompleteBtn.onclick = () => {
+    const seletor = '.app__section-task-list-item-complete';
+    //percorrendo todos os elementos que tem a classe ativa e removendo visualmente um por um
+    document.querySelectorAll(seletor).forEach(elemento => {
+        elemento.remove();
+    })
+    //filtrando o localstorage com apenas as tarefas não concluidas
+    tarefas = tarefas.filter(tarefa => !tarefa.concluida);
+    updateLocalStorage();
+}

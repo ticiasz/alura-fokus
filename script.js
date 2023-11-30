@@ -26,7 +26,7 @@ focoBt.addEventListener('click', () => {
     //a função vai dar o valor 'foco' ao atributo 'data-contexto'
     //html.setAttribute('data-contexto', 'foco');
     //banner.setAttribute('src', '/imagens/foco.png');
-    tempoDecorridoEmSegundos = 1500;
+    tempoDecorridoEmSegundos = 15;
     alterarContexto('foco');
     focoBt.classList.add('active');
 });
